@@ -34,7 +34,7 @@ def reqres(get_option):
 
 
 @pytest.fixture(scope='function')
-def auth_browser(demoshop):
+def auth_user(demoshop):
     global authorization_cookie
     options = Options()
     selenoid_capabilities = {
