@@ -13,6 +13,7 @@
 <code><img width="5%" title="Jenkins" src="https://avatars.githubusercontent.com/u/2520748?v=4"></code>
 <code><img width="5%" title="GitHub" src="https://cdn-icons-png.flaticon.com/512/25/25231.png"></code>
 <code><img width="5%" title="Telegram" src="https://cdn.icon-icons.com/icons2/923/PNG/256/telegram_icon-icons.com_72055.png"></code>
+<code><img width="5%" title="Jira" src="https://seeklogo.com/images/J/jira-logo-C71F8C0324-seeklogo.com.png"></code>
 </p>
 <br> 
 
@@ -72,34 +73,27 @@ pytest . --env=prod || true
 
 ### <img width="3%" title="Jenkins" src="https://avatars.githubusercontent.com/u/2520748?v=4"> [Launch of the project в Jenkins](https://jenkins.autotests.cloud/job/qa_diplom_api/)
 ##### Clicking on "Build Now" will start building tests and running them on the server Jenkins.
-![Jenkins_run](/images/jenkins.jpg)
+![Jenkins_run](/images/screenshots/jenkins_configure.png)
 
 ### <img width="3%" title="Allure Report" src="https://avatars.githubusercontent.com/u/5879127?s=200&v=4"> Allure report
 ##### Based on the results of passing the tests, an Allure report is generated.
-![Overview](images/report.jpg)
+![Overview](/images/screenshots/report.jpg)
 
-##### Во вкладке Behaviors находятся собранные тест кейсы, у которых описаны шаги. Для api методов реализованы вложения. Для комбинированных тестов по окончанию теста делается скриншот и сохраняется видеозапись теста.
-![Behaviors](images/report_behaviors.jpg)
+##### The Behaviors tab contains collected test cases, which describe the steps. Attachments are implemented for api methods. For combined tests, at the end of the test, a screenshot is taken and a video recording of the test is saved.
+![Behaviors](/images/screenshots/behaviors.png)
+![Behaviors1](/images/screenshots/behaviors1.png)
 
-##### Видео теста просмотра данных пользователя, авторизация происходит по api, проверка полей и данных через ui.
-![This is an image](images/test_ui.gif)
+##### Video passing the test.
+![This is an image](/images/screenshots/video.gif)
 
-В проекте используется встроенный logger - logging:
-![This is an image](images/logs.jpg)
+Logging implemented in the project:
+![This is an image](/images/screenshots/logger.png)
 ##### Implemented integration with Allure TestOps and Jira.
-![Graf](images/testops.jpg)
-
-#### Во вкладке со сьютами, мы можем:
-- Управлять всеми тест-кейсами или с каждым отдельно
-- Перезапускать каждый тест отдельно от всех тестов
-- Настроить интеграцию с Jira
-- Добавлять ручные тесты и т.д
-
-![tests](images/testops2.jpg)
+![Jira](/images/screenshots/jira.png)
 
 
-### <img width="3%" title="Telegram" src="https://cdn.icon-icons.com/icons2/923/PNG/256/telegram_icon-icons.com_72055.png"> Интеграция с Telegram
-##### После прохождения тестов, в Telegram bot приходит сообщение с графиком и небольшой информацией о тестах.
+### <img width="3%" title="Telegram" src="https://cdn.icon-icons.com/icons2/923/PNG/256/telegram_icon-icons.com_72055.png"> Integration with Telegram
+##### At the end of the tests, send a mini report to telegram
 
-![Telegram](images/telega.jpg)
+![Telegram](/images/screenshots/notifications.png)
 
