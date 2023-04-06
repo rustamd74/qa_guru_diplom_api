@@ -19,7 +19,7 @@ def test_register_successful(regress_api):
         "password": "pistol"
     }
     with allure.step('Login with email and password'):
-        register_user = regress_api.post('api/register', data=data)
+        register_user = regress_api.post('/api/register', data=data)
 
     with allure.step('Check status code 200'):
         assert register_user.status_code == 200
@@ -45,7 +45,7 @@ def test_register_unsuccessful(regress_api):
         "email": "sydney@fife"
     }
     with allure.step('Registration without password'):
-        register_user = regress_api.post("api/register", data=data)
+        register_user = regress_api.post("/api/register", data=data)
 
     with allure.step('Check status code 400'):
         assert register_user.status_code == 400
@@ -66,7 +66,7 @@ def test_login_successful(regress_api):
         "password": "cityslicka"
     }
     with allure.step('Login with email and password'):
-        login_user = regress_api.post("api/login", data=data)
+        login_user = regress_api.post("/api/login", data=data)
 
     with allure.step('Check status code 200'):
         assert login_user.status_code == 200
@@ -89,7 +89,7 @@ def test_login_unsuccessful(regress_api):
         "email": "peter@klaven"
     }
     with allure.step('Login without password'):
-        unlogin_user = regress_api.post("api/login", data=data)
+        unlogin_user = regress_api.post("/api/login", data=data)
 
     with allure.step('Check status code 400'):
         assert unlogin_user.status_code == 400
@@ -112,7 +112,7 @@ def test_create(regress_api):
         "createdAt": "2023-03-08T11:28:46.826Z"
     }
     with allure.step('Create user'):
-        create_user = regress_api.post("api/users", data=data)
+        create_user = regress_api.post("/api/users", data=data)
 
     with allure.step('Check status code 201'):
         assert create_user.status_code == 201
@@ -129,7 +129,7 @@ def test_create(regress_api):
 @allure.suite('regress')
 def test_delete(regress_api):
     with allure.step('Delete user'):
-        delete_user = regress_api.delete("api/users/2")
+        delete_user = regress_api.delete("/api/users/2")
 
     with allure.step('Check status code 204'):
         assert delete_user.status_code == 204

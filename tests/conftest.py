@@ -19,18 +19,18 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope="session")
-def get_option(request):
+def env(request):
     return request.config.getoption("--env")
 
 
-@pytest.fixture(scope='session')
-def demoshop(get_option):
-    return DemoQaWithEnv(get_option)
+@pytest.fixture(scope="session")
+def demoshop(env):
+    return DemoQaWithEnv(env)
 
 
-@pytest.fixture(scope='session')
-def reqres(get_option):
-    return DemoQaWithEnv(get_option).reqres
+@pytest.fixture(scope="session")
+def regress_api(env):
+    return DemoQaWithEnv(env).reqres
 
 
 @pytest.fixture(scope='function')
@@ -56,7 +56,7 @@ def auth_user(demoshop):
     browser.config.window_width = 1920
     browser.config.window_height = 1080
     if authorization_cookie is None:
-        response = demoshop.login(os.getenv("LOGIN"), os.getenv("PASSWORD"))
+        response = demoshop.login(os.getenv("EMAIL"), os.getenv("PASSWORD"))
         authorization_cookie = response.cookies.get('NOPCOMMERCE.AUTH')
     browser.open("/Themes/DefaultClean/Content/images/logo.png")
     browser.driver.add_cookie({"name": 'NOPCOMMERCE.AUTH', "value": authorization_cookie})
