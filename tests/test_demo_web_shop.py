@@ -45,7 +45,7 @@ def test_checking_shopping_cart(demoshop):
         assert response.status_code == 200
 
 
-@allure.title('Authorized user login')
+@allure.title('Removing a product from the cart')
 @allure.tag('ui with api')
 @allure.label('owner', 'dzhafarov_ro')
 @allure.severity(Severity.CRITICAL)
@@ -61,7 +61,7 @@ def test_update_shopping_cart(auth_user, demoshop):
         auth_user.element('.order-summary-content').should(have.text('Your Shopping Cart is empty!'))
 
 
-@allure.title('Authorized user login')
+@allure.title('Exit from personal account')
 @allure.tag('ui with api')
 @allure.label('owner', 'dzhafarov_ro')
 @allure.severity(Severity.CRITICAL)

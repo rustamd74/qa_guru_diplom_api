@@ -1,47 +1,65 @@
 import os
 
-import allure
+from selenium import webdriver
 import pytest
 from dotenv import load_dotenv
 from selene.support.shared import browser
-
+from selenium.webdriver.chrome.options import Options
 from framework.demoqa_with_env import DemoQaWithEnv
+from utils import attach
 
 
+authorization_cookie = None
 load_dotenv()
+DEFAULT_BROWSER_VERSION = "100.0"
 
 
 def pytest_addoption(parser):
-    parser.addoption("--env")
+    parser.addoption("--env", action='store', default="prod")
 
 
 @pytest.fixture(scope="session")
-def env(request):
+def get_option(request):
     return request.config.getoption("--env")
 
 
-@pytest.fixture(scope="session")
-def demoshop(env):
-    return DemoQaWithEnv(env)
-
-
-@pytest.fixture(scope="session")
-def regress_api(env):
-    return DemoQaWithEnv(env).reqres
+@pytest.fixture(scope='session')
+def demoshop(get_option):
+    return DemoQaWithEnv(get_option)
 
 
 @pytest.fixture(scope='session')
-def cookie(demoshop):
-    response = demoshop.login(os.getenv("EMAIL"), os.getenv("PASSWORD"))
-    authorization_cookie = response.cookies.get("NOPCOMMERCE.AUTH")
-
-    return authorization_cookie
+def reqres(get_option):
+    return DemoQaWithEnv(get_option).reqres
 
 
 @pytest.fixture(scope='function')
-def auth_user(demoshop, cookie):
+def auth_browser(demoshop):
+    global authorization_cookie
+    options = Options()
+    selenoid_capabilities = {
+        "browserName": "chrome",
+        "browserVersion": "100.0",
+        "selenoid:options": {
+            "enableVNC": True,
+            "enableVideo": True
+        }
+    }
+    options.capabilities.update(selenoid_capabilities)
+    login = os.getenv('LOGIN_SELENOID')
+    password = os.getenv('PASSWORD_SELENOID')
+    driver = webdriver.Remote(
+        command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
+        options=options)
+    browser.config.driver = driver
     browser.config.base_url = demoshop.demoqa.url
+    browser.config.window_width = 1920
+    browser.config.window_height = 1080
+    if authorization_cookie is None:
+        response = demoshop.login(os.getenv("LOGIN"), os.getenv("PASSWORD"))
+        authorization_cookie = response.cookies.get('NOPCOMMERCE.AUTH')
     browser.open("/Themes/DefaultClean/Content/images/logo.png")
-    browser.driver.add_cookie({"name": "NOPCOMMERCE.AUTH", "value": cookie})
+    browser.driver.add_cookie({"name": 'NOPCOMMERCE.AUTH', "value": authorization_cookie})
     yield browser
-    browser.quit()
+    attach.add_screenshot(browser)
+    attach.add_video(browser)
