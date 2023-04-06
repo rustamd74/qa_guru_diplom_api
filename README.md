@@ -77,7 +77,7 @@ pytest . --env=prod || true
 
 ### <img width="3%" title="Allure Report" src="https://avatars.githubusercontent.com/u/5879127?s=200&v=4"> Allure report
 ##### Based on the results of passing the tests, an Allure report is generated.
-![Overview](/images/screenshots/report.jpg)
+![Overview](/images/screenshots/report.png)
 
 ##### The Behaviors tab contains collected test cases, which describe the steps. Attachments are implemented for api methods. For combined tests, at the end of the test, a screenshot is taken and a video recording of the test is saved.
 ![Behaviors](/images/screenshots/behaviors.png)
