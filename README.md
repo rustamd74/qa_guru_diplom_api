@@ -71,7 +71,7 @@ pytest . --env=prod || true
 ```
 
 
-### <img width="3%" title="Jenkins" src="https://avatars.githubusercontent.com/u/2520748?v=4"> [Launch of the project в Jenkins](https://jenkins.autotests.cloud/job/qa_diplom_api/)
+### <img width="3%" title="Jenkins" src="https://avatars.githubusercontent.com/u/2520748?v=4"> [Starting a project in Jenkins](https://jenkins.autotests.cloud/job/dzhafarov_python_diplom_api/)
 ##### Clicking on "Build Now" will start building tests and running them on the server Jenkins.
 ![Jenkins_run](/images/screenshots/jenkins_configure.png)
 
